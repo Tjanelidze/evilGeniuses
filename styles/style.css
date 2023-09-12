@@ -1,0 +1,183 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #152938;
+  font-family: "Atkinson Hyperlegible", sans-serif;
+}
+
+.memory {
+  text-align: center;
+  color: #fcfcfc;
+  font-size: 40px;
+  font-weight: 700;
+  padding-bottom: 78px;
+}
+
+.container {
+  width: 100%;
+  padding: 0 30px;
+  max-width: 754px;
+}
+
+.inputs-wrapper {
+  display: grid;
+  gap: 33px;
+  background: white;
+  padding: 56px;
+  border-radius: 20px;
+}
+
+.boxes-and-names-wrapper {
+  width: 100%;
+}
+
+h3 {
+  color: #7191a5;
+  font-size: 20px;
+  font-weight: 700;
+  text-align: left;
+  margin-bottom: 16px;
+}
+
+.theme-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+.theme {
+  text-align: center;
+  padding: 13px 0;
+  background-color: #bcced9;
+  width: 100%;
+  border-radius: 26px;
+  color: #fcfcfc;
+  font-size: 26px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.theme:hover {
+  background-color: #6395b8 !important;
+}
+
+.players-number-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 21px;
+}
+
+.number {
+  text-align: center;
+  padding: 13px 0;
+  background-color: #bcced9;
+  border-radius: 26px;
+  width: 100%;
+  color: #fcfcfc;
+  font-size: 26px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.number:hover {
+  background-color: #6395b8 !important;
+}
+
+.chosen {
+  background-color: #304859;
+}
+
+.grid-size-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.grid-size {
+  text-align: center;
+  padding: 13px 0 15px;
+  background-color: #bcced9;
+  width: 100%;
+  border-radius: 26px;
+  color: #fcfcfc;
+  font-size: 26px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.grid-size:hover {
+  background-color: #6395b8 !important;
+}
+
+.chosen {
+  background-color: #304859;
+}
+
+.start {
+  border: none;
+  background-color: #fda214;
+  padding: 15px 0;
+  width: 100%;
+  border-radius: 26px;
+  cursor: pointer;
+  color: #fcfcfc;
+  font-size: 31px;
+  font-weight: 700;
+}
+
+@media (max-width: 430px) {
+  .memory {
+    font-size: 32px;
+    font-weight: 700;
+    padding-bottom: 45px;
+  }
+  .container {
+    padding: 0 15px;
+  }
+
+  .inputs-wrapper {
+    gap: 24px;
+    padding: 24px;
+  }
+
+  h3 {
+    font-size: 15px;
+    margin-bottom: 11px;
+  }
+  .theme-wrapper {
+    gap: 11px;
+  }
+
+  .theme {
+    padding: 13px 0;
+    font-size: 18px;
+  }
+
+  .players-number-wrapper {
+    gap: 11px;
+  }
+
+  .number {
+    font-size: 18px;
+  }
+
+  .grid-size-wrapper {
+    gap: 11px;
+  }
+
+  .grid-size {
+    font-size: 18px;
+  }
+
+  .start {
+    padding: 14px 0;
+    font-size: 20px;
+  }
+}
