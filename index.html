@@ -3,7 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@700&display=swap"
+      rel="stylesheet"
+    />
     <link
       rel="icon"
       type="image/png"
@@ -13,5 +18,38 @@
     <link rel="stylesheet" href="./styles/style.css" />
     <title>Memory game</title>
   </head>
-  <body></body>
+  <body>
+    <div class="container">
+      <h1 class="memory">memory</h1>
+      <div class="inputs-wrapper">
+        <div class="boxes-and-names-wrapper">
+          <h3>Select Theme</h3>
+          <div class="theme-wrapper">
+            <div class="chosen theme">Numbers</div>
+            <div class="theme">Icons</div>
+          </div>
+        </div>
+        <div class="boxes-and-names-wrapper">
+          <h3>Numbers of Players</h3>
+          <div class="players-number-wrapper">
+            <div class="chosen number">1</div>
+            <div class="number">2</div>
+            <div class="number">3</div>
+            <div class="number">4</div>
+          </div>
+        </div>
+        <div class="boxes-and-names-wrapper">
+          <h3>Grid Size</h3>
+          <div class="grid-size-wrapper">
+            <div class="chosen grid-size">4x4</div>
+            <div class="grid-size">6x6</div>
+          </div>
+        </div>
+        <a href="./pages/game.html"
+          ><button class="start">Start Game</button></a
+        >
+      </div>
+    </div>
+    <script src="./js/index.js"></script>
+  </body>
 </html>
