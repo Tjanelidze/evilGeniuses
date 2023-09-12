@@ -8,20 +8,18 @@ body {
   font-family: "Atkinson Hyperlegible", sans-serif;
   font-weight: 700;
   min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .container {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 100%;
+  height: 100vh;
+  margin: 0 auto;
   position: relative;
   align-items: center;
   justify-content: center;
-  gap: 110px;
-  width: 100%;
   max-width: 1200px;
+  padding: 0px 30px;
 }
 
 .header {
@@ -29,7 +27,6 @@ body {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 0px 30px;
 }
 
 .menu {
@@ -78,6 +75,7 @@ h1 {
 .circle_container {
   display: grid;
   grid-template-columns: 80px 80px 80px 80px;
+  justify-self: center;
   gap: 20px;
   font-weight: 700;
   font-size: 50px;
@@ -101,7 +99,6 @@ h1 {
   justify-content: space-between;
   width: 100%;
   gap: 30px;
-  padding: 0px 30px;
 }
 
 .player {
@@ -310,31 +307,30 @@ h2 {
     font-size: 18px;
   }
 
-.mobile_menu {
-position:absolute;
-width: 70%;
-text-align: center;
-background-color: red;
-border-radius: 10px;
-padding: 24px;
-display: flex;
-flex-direction: column;
-gap: 16px;
-display: none;
-}
+  .mobile_menu {
+    position: absolute;
+    width: 70%;
+    text-align: center;
+    background-color: red;
+    border-radius: 10px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    display: none;
+  }
 
+  .menu_box {
+    background-color: #dfe7ec;
+    width: 100%;
+    border-radius: 26px;
+    color: #304859;
+    font-size: 18px;
+    padding: 15px;
+  }
 
-.menu_box {
-  background-color: #DFE7EC ;
-width: 100%;
-border-radius: 26px;
-color: #304859;
-font-size: 18px;
-padding: 15px;
-}
-
-.restart_menu {
-  background-color: #FDA214;
-  color: white;
-}
+  .restart_menu {
+    background-color: #fda214;
+    color: white;
+  }
 }
