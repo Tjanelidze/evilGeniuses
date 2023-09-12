@@ -1,0 +1,107 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Atkinson Hyperlegible", sans-serif;
+  font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 110px;
+  width: 100%;
+  max-width: 1500px;
+  margin: 65px 165px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.setup {
+  display: flex;
+  gap: 16px;
+}
+
+.restart {
+  width: 127px;
+  height: 50px;
+  font-weight: 700;
+  font-size: 20px;
+  color: #fcfcfc;
+  background-color: #fda214;
+  border: 0;
+  outline: 0;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.new_game {
+  width: 140px;
+  height: 50px;
+  font-weight: 700;
+  font-size: 20px;
+  color: #304859;
+  background-color: #dfe7ec;
+  border: 0;
+  outline: 0;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.circle_container {
+  display: grid;
+  grid-template-columns: 80px 80px 80px 80px;
+  gap: 20px;
+  font-weight: 700;
+  font-size: 50px;
+  text-align: center;
+  color: white;
+}
+
+.circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  background-color: #304859;
+  cursor: pointer;
+}
+
+.player-footer {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: 30px;
+}
+
+.player {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 250px;
+  border-radius: 8px;
+  height: 50px;
+  background-color: #dfe7ec;
+  color: #7191a5;
+}
+
+.score {
+  width: 21px;
+  size: 32px;
+  color: #304859;
+}
