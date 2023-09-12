@@ -7,8 +7,9 @@
 body {
   font-family: "Atkinson Hyperlegible", sans-serif;
   font-weight: 700;
+  min-height: 100vh;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
 }
 
@@ -18,9 +19,7 @@ body {
   align-items: center;
   justify-content: center;
   gap: 110px;
-  width: 100%;
-  max-width: 1500px;
-  margin: 65px 165px;
+  max-width: 1200px;
 }
 
 .header {
