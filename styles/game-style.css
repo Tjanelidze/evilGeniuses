@@ -19,6 +19,7 @@ body {
   align-items: center;
   justify-content: center;
   gap: 110px;
+  width: 100%;
   max-width: 1200px;
 }
 
@@ -27,8 +28,17 @@ body {
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  padding: 0px 30px;
 }
 
+.menu {
+  display: none;
+}
+
+h1 {
+  font-size: 40px;
+  color: #152938;
+}
 .setup {
   display: flex;
   gap: 16px;
@@ -86,6 +96,7 @@ body {
   justify-content: space-between;
   width: 100%;
   gap: 30px;
+  padding: 0px 30px;
 }
 
 .player {
@@ -103,4 +114,66 @@ body {
   width: 21px;
   size: 32px;
   color: #304859;
+}
+
+@media (max-width: 768px) {
+  .player {
+    width: 164px;
+    height: 80px;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 530px) {
+  .player {
+    width: 64px;
+    height: 70px;
+    align-items: center;
+  }
+
+  .layer {
+    display: none;
+  }
+
+  .score {
+    font-size: 24px;
+    padding: 2px;
+  }
+
+  .setup {
+    display: none;
+  }
+
+  .menu {
+    display: block;
+    width: 78px;
+    height: 40px;
+    color: #fcfcfc;
+    background-color: #fda214;
+    border-radius: 26px;
+    border: none;
+    font-size: 16px;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  .circle_container {
+    grid-template-columns: 55px 55px 55px 55px;
+    gap: 12px;
+    font-size: 35px;
+    color: white;
+  }
+
+  .circle {
+    width: 55px;
+    height: 55px;
+  }
+
+  .container {
+    gap: 70px;
+  }
 }
