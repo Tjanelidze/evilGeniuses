@@ -55,7 +55,10 @@ function displayCircles() {
     for (let i = 1; i <= 2; i++) {
       for (let j = 0; j < size / 2; j++) {
         const child = arrayOfCircles[j].cloneNode(true);
-        child.textContent = j + 1;
+        child.classList.add(`${arrayofIcons[j]}`);
+        const paragraph = document.createElement("p");
+        paragraph.innerHTML = j + 1;
+        child.appendChild(paragraph);
         arrayOfIconedCircles.push(child);
       }
     }
@@ -63,6 +66,7 @@ function displayCircles() {
     for (let i = 1; i <= 2; i++) {
       for (let j = 0; j < size / 2; j++) {
         const child = arrayOfCircles[j].cloneNode(true);
+        child.classList.add(`${arrayofIcons[j]}`);
         let image = document.createElement("img");
         image.src = `../assets/memory-icons/${arrayofIcons[j]}.png`;
         image.classList.add("icon-for-circles");
@@ -80,15 +84,18 @@ function displayCircles() {
     ];
   }
 
-  arrayOfIconedCircles.forEach((element) => {
-    parent.appendChild(element);
+  arrayOfIconedCircles.forEach((circle) => {
+    circle.children[0].style.transform = "rotate(90deg)";
+    parent.appendChild(circle);
   });
 
   wrapper.appendChild(parent);
-  const circles = document.querySelectorAll(".circle-for-6");
+
+  const circles = parent.querySelectorAll(".circle-for-4, .circle-for-6");
   circles.forEach((circle) => {
-    console.log(circle);
-    circle.textContent = "";
+    Array.from(circle.children).forEach((child) => {
+      // child.style.opacity = "0";
+    });
   });
 }
 
@@ -110,7 +117,6 @@ if (gameDescription.Players > 1) {
     if (gameDescription.Players == 2) {
       footer.style.justifyContent = "center";
     }
-
     footer.appendChild(player);
   }
 } else {
@@ -122,4 +128,50 @@ if (gameDescription.Players > 1) {
 
 mobileMenu.addEventListener("click", () => {
   body.classList.add("bluredFromMenu");
+});
+
+//////////////////////////////
+
+/////////////////////////////////
+const circles = body.querySelectorAll(".circle-for-4, .circle-for-6");
+let chosenCircle = [];
+let chosenToCancel = [];
+circles.forEach((circle) => {
+  circle.addEventListener("click", (e) => {
+    circle.children[0].style.transform = "rotate(0)";
+    circle.children[0].style.opacity = "100%";
+    circle.children[0].style.transition = "all 0.3s ease-in";
+
+    chosenToCancel.push(e.currentTarget);
+
+    chosenCircle.push(circle.className.split(" ")[1]);
+    setTimeout(() => {
+      if (chosenCircle.length === 2 && chosenToCancel.length === 2) {
+        chosenToCancel.length = 0;
+        chosenCircle.length = 0;
+      }
+    }, 300);
+    circle.style.background = "#FDA214";
+
+    if (chosenCircle.length === 2) {
+      if (chosenCircle[0] === chosenCircle[1]) {
+        const matchingCircles = document.querySelectorAll(
+          `.${chosenCircle[0]}`
+        );
+        ///i need 1 second pause here
+        setTimeout(() => {
+          matchingCircles[0].style.background = "#BCCED9";
+          matchingCircles[1].style.background = "#BCCED9";
+          matchingCircles[0].style.transition = "all 0.3s ease-out";
+        }, 400);
+      } else {
+        chosenToCancel.forEach((element) => {
+          setTimeout(() => {
+            element.style.background = "#304859";
+            element.children[0].style.opacity = "0";
+          }, 800);
+        });
+      }
+    }
+  });
 });
