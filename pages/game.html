@@ -7,7 +7,7 @@
     <title>Memory game</title>
   </head>
   <body>
-    <div class="container">
+    <div class="menu-parent">
       <div class="result">
         <h2>Player 3 Wins!</h2>
         <p class="Game_over">Game over! Here are the results...</p>
@@ -36,40 +36,39 @@
         </div>
       </div>
       <div class="mobile_menu">
-        <div class="menu_box restart_menu">Restart</div>
-        <div class="menu_box">New Game</div>
+        <a href="./game.html"
+          ><div class="menu_box restart_menu">Restart</div></a
+        >
+        <a href="../index.html">
+          <div class="menu_box">New Game</div>
+        </a>
         <div class="menu_box">Resume Game</div>
+      </div>
+      <div class="container">
+        <div class="header">
+          <h1>memory</h1>
+          <button class="menu">Menu</button>
+          <div class="setup">
+            <a href="./game.html"><button class="restart">Restart</button></a>
+            <a href="../index.html"
+              ><button class="new_game">New Game</button></a
+            >
+          </div>
+        </div>
+        <div class="circles-parent-wrapper"></div>
 
-      </div>
-      <div class="header">
-        <h1>memory</h1>
-        <button class="menu">Menu</button>
-        <div class="setup">
-          <button class="restart">Restart</button>
-          <button class="new_game">New Game</button>
+        <div class="player-footer">
+          <div class="timer-moves-container">
+            <p class="time-p">Time</p>
+            <p class="timer-moves">0:00</p>
+          </div>
+          <div class="timer-moves-container">
+            <p class="Moves-p">Moves</p>
+            <p class="timer-moves">0</p>
+          </div>
         </div>
       </div>
-      <div class="circles-parent-wrapper"></div>
-
-      <div class="player-footer">
-        <div class="player">
-          <p class="player1">P<span class="layer">layer</span>1</p>
-          <span class="score">0</span>
-        </div>
-        <div class="player">
-          <p class="player2">P<span class="layer">layer</span>2</p>
-          <span class="score">0</span>
-        </div>
-        <div class="player">
-          <p class="player3">P<span class="layer">layer</span>3</p>
-          <span class="score">0</span>
-        </div>
-        <div class="player">
-          <p class="player4">P<span class="layer">layer</span>4</p>
-          <span class="score">0</span>
-        </div>
-      </div>
+      <script src="../js/game.js"></script>
     </div>
-    <script src="../js/game.js"></script>
   </body>
 </html>
