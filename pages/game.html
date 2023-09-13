@@ -8,51 +8,67 @@
   </head>
   <body>
     <div class="container">
+      <div class="result">
+        <h2>Player 3 Wins!</h2>
+        <p class="Game_over">Game over! Here are the results...</p>
+        <div class="box">
+          Player 3 (winner!)
+          <p class="box_score">8 Pairs</p>
+        </div>
+        <div class="box">
+          Player 1
+
+          <p class="box_score">4 Pairs</p>
+        </div>
+        <div class="box">
+          Player 2
+
+          <p class="box_score">3 Pairs</p>
+        </div>
+        <div class="box">
+          Player 4
+
+          <p class="box_score">1 Pairs</p>
+        </div>
+        <div class="reset_game">
+          <button class="restart_game">Restart</button>
+          <button class="setup_new_game">Setup New Game</button>
+        </div>
+      </div>
+      <div class="mobile_menu">
+        <div class="menu_box restart_menu">Restart</div>
+        <div class="menu_box">New Game</div>
+        <div class="menu_box">Resume Game</div>
+      </div>
       <div class="header">
-        <h2>memory</h2>
+        <h1>memory</h1>
+        <button class="menu">Menu</button>
         <div class="setup">
           <button class="restart">Restart</button>
           <button class="new_game">New Game</button>
         </div>
       </div>
-
-      <div class="circle_container">
-        <div class="circle">1</div>
-        <div class="circle">2</div>
-        <div class="circle">3</div>
-        <div class="circle">4</div>
-        <div class="circle">5</div>
-        <div class="circle">6</div>
-        <div class="circle">7</div>
-        <div class="circle">8</div>
-        <div class="circle">9</div>
-        <div class="circle">10</div>
-        <div class="circle">11</div>
-        <div class="circle">12</div>
-        <div class="circle">13</div>
-        <div class="circle">14</div>
-        <div class="circle">15</div>
-        <div class="circle">16</div>
-      </div>
+      <div class="circles-parent-wrapper"></div>
 
       <div class="player-footer">
         <div class="player">
-          <p class="player1">Player 1</p>
+          <p class="player1">P<span class="layer">layer</span>1</p>
           <span class="score">0</span>
         </div>
         <div class="player">
-          <p class="player2">Player 2</p>
+          <p class="player2">P<span class="layer">layer</span>2</p>
           <span class="score">0</span>
         </div>
         <div class="player">
-          <p class="player3">Player 3</p>
+          <p class="player3">P<span class="layer">layer</span>3</p>
           <span class="score">0</span>
         </div>
         <div class="player">
-          <p class="player4">Player 4</p>
+          <p class="player4">P<span class="layer">layer</span>4</p>
           <span class="score">0</span>
         </div>
       </div>
     </div>
+    <script src="../js/game.js"></script>
   </body>
 </html>
