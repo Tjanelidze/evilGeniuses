@@ -2,6 +2,8 @@ const wrapper = document.querySelector(".circles-parent-wrapper");
 const footer = document.querySelector(".player-footer");
 const timeAndMoves = document.querySelectorAll(".timer-moves-container");
 const mobileMenu = document.querySelector(".menu");
+const timerDisplay = document.querySelector(".timer");
+const movesDisplay = document.querySelector(".moves");
 const body = document.body;
 
 let arrayofIcons = [
@@ -95,6 +97,7 @@ function displayCircles() {
   circles.forEach((circle) => {
     Array.from(circle.children).forEach((child) => {
       child.style.opacity = "0";
+      child.style.visibility = "hidden";
     });
   });
 }
@@ -133,7 +136,6 @@ mobileMenu.addEventListener("click", () => {
 //////////////////////////////
 
 /////////////////////////////////
-const timerDisplay = document.querySelector(".timer");
 
 let seconds = 0;
 let minutes = 0;
@@ -151,10 +153,12 @@ function updateTimer() {
 
   timerDisplay.textContent = `${displayMinutes}:${displaySeconds}`;
 }
+
 let timerInterval;
 
 const circles = body.querySelectorAll(".circle-for-4, .circle-for-6");
-let chosenToCancel = [];
+const chosenToCancel = [];
+let moves = 0;
 circles.forEach((circle) => {
   circle.addEventListener("click", (e) => {
     if (!timerInterval) {
@@ -169,12 +173,11 @@ circles.forEach((circle) => {
     if (e.currentTarget.classList.contains("unclickable")) {
       return;
     }
-    console.log(e.currentTarget);
     e.currentTarget.style.background = "#FDA214";
     e.currentTarget.children[0].style.transform = "rotate(0)";
     e.currentTarget.children[0].style.opacity = "100%";
     e.currentTarget.children[0].style.transition = "all 0.3s ease-in";
-
+    e.currentTarget.children[0].style.visibility = "visible";
     if (chosenToCancel.indexOf(e.currentTarget) < 0) {
       chosenToCancel.push(e.currentTarget);
     }
@@ -198,11 +201,14 @@ circles.forEach((circle) => {
             circle.style.transition = "all 0.3s ease-out";
             circle.classList.add("disabled");
           });
+
           circles.forEach((element) => {
             element.classList.remove("unclickable");
           });
         }, 400);
 
+        moves++;
+        movesDisplay.innerHTML = moves;
         chosenToCancel.length = 0;
       } else {
         chosenToCancel.forEach((element) => {
@@ -212,11 +218,15 @@ circles.forEach((circle) => {
           setTimeout(() => {
             element.style.background = "#304859";
             element.children[0].style.opacity = "0";
+            element.children[0].style.visibility = "hidden";
             circles.forEach((element) => {
               element.classList.remove("unclickable");
             });
           }, 800);
         });
+
+        moves++;
+        movesDisplay.innerHTML = moves;
         chosenToCancel.length = 0;
       }
     }
