@@ -9,6 +9,7 @@ body {
   font-weight: 700;
   min-height: 100vh;
 }
+
 .menu-parent {
   position: relative;
 }
@@ -172,14 +173,19 @@ h1 {
 
 .result {
   position: absolute;
-  width: 600px;
+  max-width: 600px;
+  width: 75%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
   text-align: center;
   border-radius: 20px;
   background-color: white;
   padding: 51px 56px 69px 56px;
-  background-color: lightcoral;
+
+  z-index: 5;
   display: none;
 }
 
@@ -254,6 +260,24 @@ h2 {
 a {
   text-decoration: none;
 }
+
+.darkScreen {
+  z-index: 3;
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.bluredFromResult .result {
+  display: flex;
+}
+
+.bluredFromResult .darkScreen {
+  display: inline;
+}
+
 @media (max-width: 768px) {
   .player {
     width: 164px;
@@ -331,7 +355,6 @@ a {
   }
 
   .result {
-    position: absolute;
     width: 80%;
     padding: 21px 26px 39px 26px;
   }
@@ -371,6 +394,7 @@ a {
   }
 
   .setup_new_game {
+    font-weight: 700;
     width: 100%;
     height: 48px;
     font-size: 18px;
