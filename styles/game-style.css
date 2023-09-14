@@ -247,6 +247,7 @@ h2 {
   font-size: 20px;
   color: #304859;
   background-color: #dfe7ec;
+  font-weight: 700;
   border: 0;
   outline: 0;
   border-radius: 20px;
@@ -445,4 +446,42 @@ a {
   .bluredFromMenu .mobile_menu {
     display: flex;
   }
+}
+
+/* ///////////////////////////////////// */
+
+.mp_result {
+  position: absolute;
+  max-width: 600px;
+  width: 75%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  border-radius: 20px;
+  background-color: white;
+  padding: 51px 56px 69px 56px;
+  background-color: #a30000;
+  z-index: 5;
+  /* display: none; */
+}
+
+.mp_box {
+  padding: 16px;
+  width: 100%;
+  height: 40px;
+  margin-bottom: 8px;
+  font-size: 13px;
+}
+
+.box_time {
+  color: #304859;
+  font-size: 32px;
+}
+
+.box_score {
+  color: #304859;
+  font-size: 32px;
 }
