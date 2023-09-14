@@ -128,6 +128,15 @@ h1 {
   cursor: pointer;
 }
 
+.circle-for-6:hover {
+  background-color: #557b98;
+  transition: all 0.3s ease-in-out;
+}
+.circle-for-4:hover {
+  background-color: #557b98;
+  transition: all 0.3s ease-in-out;
+}
+
 /* /////////////////////////////////////////////// */
 
 .player-footer {
@@ -167,6 +176,40 @@ h1 {
 }
 
 .timer-moves {
+  color: #304859;
+  font-size: 32px;
+}
+.mp_result {
+  position: absolute;
+  max-width: 600px;
+  width: 75%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  border-radius: 20px;
+  background-color: white;
+  padding: 51px 56px 69px 56px;
+  z-index: 5;
+  display: none;
+}
+
+.mp_box {
+  padding: 16px;
+  width: 100%;
+  height: 40px;
+  margin-bottom: 8px;
+  font-size: 13px;
+}
+
+.box_time {
+  color: #304859;
+  font-size: 32px;
+}
+
+.box_score {
   color: #304859;
   font-size: 32px;
 }
@@ -271,11 +314,11 @@ a {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-.bluredFromResult .result {
+.bluredFromMpresult .mp_result {
   display: flex;
 }
 
-.bluredFromResult .darkScreen {
+.bluredFromMpresult .darkScreen {
   display: inline;
 }
 
@@ -291,6 +334,12 @@ a {
   .result {
     width: 480px;
     padding: 40px 46px 59px 46px;
+  }
+  .setup_new_game {
+    font-size: 16px;
+  }
+  .restart_game {
+    font-size: 16px;
   }
 }
 
@@ -378,8 +427,15 @@ a {
     font-size: 13px;
   }
 
+  .mp_result {
+    padding: 21px 26px 39px 26px;
+  }
+
+  .box_time {
+    font-size: 18px;
+  }
   .box_score {
-    font-size: 20px;
+    font-size: 18px;
   }
 
   .reset_game {
@@ -391,14 +447,14 @@ a {
   .restart_game {
     width: 100%;
     height: 48px;
-    font-size: 18px;
+    font-size: 15px;
   }
 
   .setup_new_game {
     font-weight: 700;
     width: 100%;
     height: 48px;
-    font-size: 18px;
+    font-size: 15px;
   }
 
   .mobile_menu {
@@ -449,39 +505,3 @@ a {
 }
 
 /* ///////////////////////////////////// */
-
-.mp_result {
-  position: absolute;
-  max-width: 600px;
-  width: 75%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  border-radius: 20px;
-  background-color: white;
-  padding: 51px 56px 69px 56px;
-  background-color: #a30000;
-  z-index: 5;
-  /* display: none; */
-}
-
-.mp_box {
-  padding: 16px;
-  width: 100%;
-  height: 40px;
-  margin-bottom: 8px;
-  font-size: 13px;
-}
-
-.box_time {
-  color: #304859;
-  font-size: 32px;
-}
-
-.box_score {
-  color: #304859;
-  font-size: 32px;
-}

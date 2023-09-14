@@ -7,6 +7,10 @@ const movesDisplay = document.querySelector(".moves");
 const resume = document.querySelector(".resume");
 const result = document.querySelector(".result");
 const menuParent = document.querySelector(".menu-parent");
+const restartGameFromResults = document.querySelectorAll(".restart_game");
+const setupNewGameFromResults = document.querySelectorAll(".setup_new_game");
+const boxTime = document.querySelector(".box_time ");
+const boxScore = document.querySelector(".box_score");
 const body = document.body;
 
 let arrayofIcons = [
@@ -117,7 +121,7 @@ if (gameDescription.Players > 1) {
     player.classList.add("player");
 
     player.innerHTML = `
-    <p class="player1">P<span class="layer">layer</span>1</p>
+    <p class="player1">P<span class="layer">layer</span> ${i + 1}</p>
     <span class="score">0</span>`;
 
     if (gameDescription.Players == 2) {
@@ -133,107 +137,6 @@ if (gameDescription.Players > 1) {
 }
 
 //////////////////////////////
-
-/////////////////////////////////
-
-let seconds = 0;
-let minutes = 0;
-let timerInterval;
-
-function updateTimer() {
-  seconds++;
-
-  if (seconds === 60) {
-    seconds = 0;
-    minutes++;
-  }
-
-  const displayMinutes = minutes < 10 ? `0${minutes}` : minutes;
-  const displaySeconds = seconds < 10 ? `0${seconds}` : seconds;
-
-  timerDisplay.textContent = `${displayMinutes}:${displaySeconds}`;
-}
-
-const circles = body.querySelectorAll(".circle-for-4, .circle-for-6");
-const chosenToCancel = [];
-let countOfSucces = 0;
-let moves = 0;
-circles.forEach((circle) => {
-  circle.addEventListener("click", (e) => {
-    if (!timerInterval) {
-      timerInterval = setInterval(updateTimer, 1000);
-    }
-
-    //////////////////////////////////////////////////
-
-    if (e.currentTarget.classList.contains("disabled")) {
-      return;
-    }
-    if (e.currentTarget.classList.contains("unclickable")) {
-      return;
-    }
-    e.currentTarget.style.background = "#FDA214";
-    e.currentTarget.children[0].style.transform = "rotate(0)";
-    e.currentTarget.children[0].style.opacity = "100%";
-    e.currentTarget.children[0].style.transition = "all 0.3s ease-in";
-    e.currentTarget.children[0].style.visibility = "visible";
-    if (chosenToCancel.indexOf(e.currentTarget) < 0) {
-      chosenToCancel.push(e.currentTarget);
-    }
-
-    if (chosenToCancel.length === 2) {
-      if (
-        chosenToCancel[0].className.split(" ")[1] ==
-        chosenToCancel[1].className.split(" ")[1]
-      ) {
-        const matchingCircles = document.querySelectorAll(
-          `.${chosenToCancel[1].className.split(" ")[1]}`
-        );
-
-        circles.forEach((element) => {
-          element.classList.add("unclickable");
-        });
-
-        setTimeout(() => {
-          matchingCircles.forEach((circle) => {
-            circle.style.background = "#BCCED9";
-            circle.style.transition = "all 0.3s ease-out";
-            circle.classList.add("disabled");
-          });
-
-          circles.forEach((element) => {
-            element.classList.remove("unclickable");
-          });
-        }, 400);
-        countOfSucces++;
-        moves++;
-        movesDisplay.innerHTML = moves;
-        chosenToCancel.length = 0;
-      } else {
-        chosenToCancel.forEach((element) => {
-          circles.forEach((element) => {
-            element.classList.add("unclickable");
-          });
-          setTimeout(() => {
-            element.style.background = "#304859";
-            element.children[0].style.opacity = "0";
-            element.children[0].style.visibility = "hidden";
-            circles.forEach((element) => {
-              element.classList.remove("unclickable");
-            });
-          }, 800);
-        });
-
-        moves++;
-        movesDisplay.innerHTML = moves;
-        chosenToCancel.length = 0;
-      }
-    }
-  });
-});
-
-////////////////////////////////////////////////////
-
 mobileMenu.addEventListener("click", () => {
   menuParent.classList.add("bluredFromMenu");
 
@@ -245,12 +148,137 @@ resume.addEventListener("click", () => {
   menuParent.classList.remove("bluredFromMenu");
 });
 
-circles.forEach((circle) => {
-  circle.addEventListener("click", () => {
-    console.log(countOfSucces, circles.length);
-
-    if (countOfSucces * 2 == circles.length) {
-      menuParent.classList.add("bluredFromResult");
-    }
+restartGameFromResults.forEach((element) => {
+  element.addEventListener("click", () => {
+    window.location.reload();
   });
 });
+
+setupNewGameFromResults.forEach((element) => {
+  element.addEventListener("click", () => {
+    window.history.back();
+  });
+});
+
+/////////////////////////////
+
+/////////////////////////////////
+if (gameDescription.Players == 1) {
+  let seconds = 0;
+  let minutes = 0;
+  let timerInterval;
+
+  function updateTimer() {
+    seconds++;
+
+    if (seconds === 60) {
+      seconds = 0;
+      minutes++;
+    }
+
+    const displayMinutes = minutes < 10 ? `0${minutes}` : minutes;
+    const displaySeconds = seconds < 10 ? `0${seconds}` : seconds;
+
+    timerDisplay.textContent = `${displayMinutes}:${displaySeconds}`;
+  }
+
+  const circles = body.querySelectorAll(".circle-for-4, .circle-for-6");
+  const chosenToCancel = [];
+  let countOfSucces = 0;
+  let moves = 0;
+  circles.forEach((circle) => {
+    circle.addEventListener("click", (e) => {
+      if (!timerInterval) {
+        timerInterval = setInterval(updateTimer, 1000);
+      }
+
+      //////////////////////////////////////////////////
+
+      if (e.currentTarget.classList.contains("disabled")) {
+        return;
+      }
+      if (e.currentTarget.classList.contains("unclickable")) {
+        return;
+      }
+      e.currentTarget.style.background = "#FDA214";
+      e.currentTarget.children[0].style.transform = "rotate(0)";
+      e.currentTarget.children[0].style.opacity = "100%";
+      e.currentTarget.children[0].style.transition = "all 0.3s ease-in";
+      e.currentTarget.children[0].style.visibility = "visible";
+      if (chosenToCancel.indexOf(e.currentTarget) < 0) {
+        chosenToCancel.push(e.currentTarget);
+      }
+
+      if (chosenToCancel.length === 2) {
+        if (
+          chosenToCancel[0].className.split(" ")[1] ==
+          chosenToCancel[1].className.split(" ")[1]
+        ) {
+          const matchingCircles = document.querySelectorAll(
+            `.${chosenToCancel[1].className.split(" ")[1]}`
+          );
+
+          circles.forEach((element) => {
+            element.classList.add("unclickable");
+          });
+
+          setTimeout(() => {
+            matchingCircles.forEach((circle) => {
+              circle.style.background = "#BCCED9";
+              circle.style.transition = "all 0.3s ease-out";
+              circle.classList.add("disabled");
+            });
+
+            circles.forEach((element) => {
+              element.classList.remove("unclickable");
+            });
+          }, 400);
+          countOfSucces++;
+          moves++;
+          movesDisplay.innerHTML = moves;
+          chosenToCancel.length = 0;
+        } else {
+          chosenToCancel.forEach((element) => {
+            circles.forEach((element) => {
+              element.classList.add("unclickable");
+            });
+            setTimeout(() => {
+              element.style.background = "#304859";
+              element.children[0].style.opacity = "0";
+              element.children[0].style.visibility = "hidden";
+              circles.forEach((element) => {
+                element.classList.remove("unclickable");
+              });
+            }, 800);
+          });
+
+          moves++;
+          movesDisplay.innerHTML = moves;
+          chosenToCancel.length = 0;
+        }
+      }
+    });
+  });
+
+  circles.forEach((circle) => {
+    circle.addEventListener("click", () => {
+      if (countOfSucces * 2 == circles.length) {
+        setTimeout(() => {
+          menuParent.classList.add("bluredFromMpresult");
+          clearInterval(timerInterval);
+          boxTime.innerHTML = timerDisplay.textContent;
+          boxScore.innerHTML = movesDisplay.textContent;
+        }, 700);
+      }
+    });
+  });
+} else {
+
+
+
+  
+  
+  for (let i = 1; i <= gameDescription.Players; i++) {
+     
+  }
+}
