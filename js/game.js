@@ -4,6 +4,9 @@ const timeAndMoves = document.querySelectorAll(".timer-moves-container");
 const mobileMenu = document.querySelector(".menu");
 const timerDisplay = document.querySelector(".timer");
 const movesDisplay = document.querySelector(".moves");
+const resume = document.querySelector(".resume");
+const result = document.querySelector(".result");
+const menuParent = document.querySelector(".menu-parent");
 const body = document.body;
 
 let arrayofIcons = [
@@ -96,8 +99,8 @@ function displayCircles() {
   const circles = parent.querySelectorAll(".circle-for-4, .circle-for-6");
   circles.forEach((circle) => {
     Array.from(circle.children).forEach((child) => {
-      child.style.opacity = "0";
-      child.style.visibility = "hidden";
+      // child.style.opacity = "0";
+      // child.style.visibility = "hidden";
     });
   });
 }
@@ -129,16 +132,13 @@ if (gameDescription.Players > 1) {
   });
 }
 
-mobileMenu.addEventListener("click", () => {
-  body.classList.add("bluredFromMenu");
-});
-
 //////////////////////////////
 
 /////////////////////////////////
 
 let seconds = 0;
 let minutes = 0;
+let timerInterval;
 
 function updateTimer() {
   seconds++;
@@ -154,10 +154,9 @@ function updateTimer() {
   timerDisplay.textContent = `${displayMinutes}:${displaySeconds}`;
 }
 
-let timerInterval;
-
 const circles = body.querySelectorAll(".circle-for-4, .circle-for-6");
 const chosenToCancel = [];
+let countOfSucces = 0;
 let moves = 0;
 circles.forEach((circle) => {
   circle.addEventListener("click", (e) => {
@@ -206,7 +205,7 @@ circles.forEach((circle) => {
             element.classList.remove("unclickable");
           });
         }, 400);
-
+        countOfSucces++;
         moves++;
         movesDisplay.innerHTML = moves;
         chosenToCancel.length = 0;
@@ -229,6 +228,29 @@ circles.forEach((circle) => {
         movesDisplay.innerHTML = moves;
         chosenToCancel.length = 0;
       }
+    }
+  });
+});
+
+////////////////////////////////////////////////////
+
+mobileMenu.addEventListener("click", () => {
+  menuParent.classList.add("bluredFromMenu");
+
+  clearInterval(timerInterval);
+});
+
+resume.addEventListener("click", () => {
+  timerInterval = setInterval(updateTimer, 1000);
+  menuParent.classList.remove("bluredFromMenu");
+});
+
+circles.forEach((circle) => {
+  circle.addEventListener("click", () => {
+    console.log(countOfSucces, circles.length);
+
+    if (countOfSucces * 2 == circles.length) {
+      menuParent.classList.add("bluredFromResult");
     }
   });
 });
