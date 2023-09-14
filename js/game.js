@@ -94,7 +94,7 @@ function displayCircles() {
   const circles = parent.querySelectorAll(".circle-for-4, .circle-for-6");
   circles.forEach((circle) => {
     Array.from(circle.children).forEach((child) => {
-      // child.style.opacity = "0";
+      child.style.opacity = "0";
     });
   });
 }
@@ -133,44 +133,91 @@ mobileMenu.addEventListener("click", () => {
 //////////////////////////////
 
 /////////////////////////////////
+const timerDisplay = document.querySelector(".timer");
+
+let seconds = 0;
+let minutes = 0;
+
+function updateTimer() {
+  seconds++;
+
+  if (seconds === 60) {
+    seconds = 0;
+    minutes++;
+  }
+
+  const displayMinutes = minutes < 10 ? `0${minutes}` : minutes;
+  const displaySeconds = seconds < 10 ? `0${seconds}` : seconds;
+
+  timerDisplay.textContent = `${displayMinutes}:${displaySeconds}`;
+}
+let timerInterval;
+
 const circles = body.querySelectorAll(".circle-for-4, .circle-for-6");
-let chosenCircle = [];
 let chosenToCancel = [];
 circles.forEach((circle) => {
   circle.addEventListener("click", (e) => {
-    circle.children[0].style.transform = "rotate(0)";
-    circle.children[0].style.opacity = "100%";
-    circle.children[0].style.transition = "all 0.3s ease-in";
+    if (!timerInterval) {
+      timerInterval = setInterval(updateTimer, 1000);
+    }
 
-    chosenToCancel.push(e.currentTarget);
+    //////////////////////////////////////////////////
 
-    chosenCircle.push(circle.className.split(" ")[1]);
-    setTimeout(() => {
-      if (chosenCircle.length === 2 && chosenToCancel.length === 2) {
-        chosenToCancel.length = 0;
-        chosenCircle.length = 0;
-      }
-    }, 300);
-    circle.style.background = "#FDA214";
+    if (e.currentTarget.classList.contains("disabled")) {
+      return;
+    }
+    if (e.currentTarget.classList.contains("unclickable")) {
+      return;
+    }
+    console.log(e.currentTarget);
+    e.currentTarget.style.background = "#FDA214";
+    e.currentTarget.children[0].style.transform = "rotate(0)";
+    e.currentTarget.children[0].style.opacity = "100%";
+    e.currentTarget.children[0].style.transition = "all 0.3s ease-in";
 
-    if (chosenCircle.length === 2) {
-      if (chosenCircle[0] === chosenCircle[1]) {
+    if (chosenToCancel.indexOf(e.currentTarget) < 0) {
+      chosenToCancel.push(e.currentTarget);
+    }
+
+    if (chosenToCancel.length === 2) {
+      if (
+        chosenToCancel[0].className.split(" ")[1] ==
+        chosenToCancel[1].className.split(" ")[1]
+      ) {
         const matchingCircles = document.querySelectorAll(
-          `.${chosenCircle[0]}`
+          `.${chosenToCancel[1].className.split(" ")[1]}`
         );
-        ///i need 1 second pause here
+
+        circles.forEach((element) => {
+          element.classList.add("unclickable");
+        });
+
         setTimeout(() => {
-          matchingCircles[0].style.background = "#BCCED9";
-          matchingCircles[1].style.background = "#BCCED9";
-          matchingCircles[0].style.transition = "all 0.3s ease-out";
+          matchingCircles.forEach((circle) => {
+            circle.style.background = "#BCCED9";
+            circle.style.transition = "all 0.3s ease-out";
+            circle.classList.add("disabled");
+          });
+          circles.forEach((element) => {
+            element.classList.remove("unclickable");
+          });
         }, 400);
+
+        chosenToCancel.length = 0;
       } else {
         chosenToCancel.forEach((element) => {
+          circles.forEach((element) => {
+            element.classList.add("unclickable");
+          });
           setTimeout(() => {
             element.style.background = "#304859";
             element.children[0].style.opacity = "0";
+            circles.forEach((element) => {
+              element.classList.remove("unclickable");
+            });
           }, 800);
         });
+        chosenToCancel.length = 0;
       }
     }
   });
