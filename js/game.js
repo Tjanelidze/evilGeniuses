@@ -12,6 +12,7 @@ const setupNewGameFromResults = document.querySelectorAll(".setup_new_game");
 const boxTime = document.querySelector(".box_time ");
 const boxScore = document.querySelector(".box_score");
 const playersWrapper = document.querySelector(".players-wrapper");
+const playersWrapperInResult = document.querySelector(".boxes-wrapper-result");
 const body = document.body;
 
 let arrayofIcons = [
@@ -295,16 +296,14 @@ if (gameDescription.Players == 1) {
     playerBoxes[currentTurn].children[3].style.display = "inline";
   }
 
-  let arrayOfPlayers = [];
+  let arrOfPlayers = [];
 
   for (let i = 0; i < gameDescription.Players; i++) {
-    arrayOfPlayers.push([`Player${i}`, 0]);
+    arrOfPlayers.push(0);
   }
 
   let currentTurn = 0;
   const playerBoxes = playersWrapper.childNodes;
-
-  // console.log(arrayOfPlayers);
 
   playerBoxes[currentTurn].classList.add("yellowBackground");
   playerBoxes[currentTurn].children[1].style.color = "white";
@@ -365,11 +364,13 @@ if (gameDescription.Players == 1) {
           currentScore += 1;
           playerBoxes[currentTurn].children[1].textContent = currentScore;
 
+          arrOfPlayers[currentTurn] += 1;
+
           currentTurn++;
-          if (currentTurn >= arrayOfPlayers.length) {
+          if (currentTurn >= playerBoxes.length) {
             currentTurn = 0;
           }
-          
+
           goToNextPlayer();
 
           chosenToCancel.length = 0;
@@ -390,7 +391,7 @@ if (gameDescription.Players == 1) {
           chosenToCancel.length = 0;
 
           currentTurn++;
-          if (currentTurn >= arrayOfPlayers.length) {
+          if (currentTurn >= playerBoxes.length) {
             currentTurn = 0;
           }
 
@@ -405,11 +406,23 @@ if (gameDescription.Players == 1) {
       if (countOfSucces * 2 == circles.length) {
         setTimeout(() => {
           menuParent.classList.add("bluredFromResult");
-          let scoresArray = [];
-          for (let i = 0; i < arrayOfPlayers.length; i++) {
-            scoresArray.push(playerBoxes[i].childNodes[3].textContent);
-            console.log(scoresArray);
-          }
+
+          let arrWithIndices = arrOfPlayers.map((value, index) => ({
+            value,
+            index,
+          }));
+          arrWithIndices.sort((a, b) => b.value - a.value);
+
+          console.log(arrWithIndices[0].value);
+          arrWithIndices.forEach((player) => {
+            let box = document.createElement("div");
+            box.classList.add("box");
+            box.innerHTML = `Player ${player.index + 1}${
+              arrWithIndices[0].value === player.value ? " (Winner!)" : ""
+            }
+            <p class="box_score">${player.value} Pairs</p>`;
+            playersWrapperInResult.appendChild(box);
+          });
         }, 700);
       }
     });
