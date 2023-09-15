@@ -13,6 +13,7 @@ const boxTime = document.querySelector(".box_time ");
 const boxScore = document.querySelector(".box_score");
 const playersWrapper = document.querySelector(".players-wrapper");
 const playersWrapperInResult = document.querySelector(".boxes-wrapper-result");
+const declaration = document.querySelector(".declaration-of-winners");
 const body = document.body;
 
 let arrayofIcons = [
@@ -105,8 +106,8 @@ function displayCircles() {
   const circles = parent.querySelectorAll(".circle-for-4, .circle-for-6");
   circles.forEach((circle) => {
     Array.from(circle.children).forEach((child) => {
-      // child.style.opacity = "0";
-      // child.style.visibility = "hidden";
+      child.style.opacity = "0";
+      child.style.visibility = "hidden";
     });
   });
 }
@@ -417,12 +418,23 @@ if (gameDescription.Players == 1) {
           arrWithIndices.forEach((player) => {
             let box = document.createElement("div");
             box.classList.add("box");
-            box.innerHTML = `Player ${player.index + 1}${
-              arrWithIndices[0].value === player.value ? " (Winner!)" : ""
+            if (player.value === arrWithIndices[0].value) {
+              box.classList.add("winner");
             }
+            box.innerHTML = `<p class="player-name">Player ${player.index + 1}${
+              arrWithIndices[0].value === player.value ? " (Winner!)" : ""
+            }</p>
             <p class="box_score">${player.value} Pairs</p>`;
             playersWrapperInResult.appendChild(box);
           });
+
+          if (arrWithIndices[0].value === arrWithIndices[1].value) {
+            declaration.textContent = "It’s a tie!";
+          } else {
+            declaration.textContent = `Player ${
+              arrWithIndices[0].index + 1
+            } Wins!`;
+          }
         }, 700);
       }
     });
