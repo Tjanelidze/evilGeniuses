@@ -11,6 +11,7 @@ const restartGameFromResults = document.querySelectorAll(".restart_game");
 const setupNewGameFromResults = document.querySelectorAll(".setup_new_game");
 const boxTime = document.querySelector(".box_time ");
 const boxScore = document.querySelector(".box_score");
+const playersWrapper = document.querySelector(".players-wrapper");
 const body = document.body;
 
 let arrayofIcons = [
@@ -117,22 +118,26 @@ displayCircles();
 
 if (gameDescription.Players > 1) {
   for (let i = 0; i < gameDescription.Players; i++) {
-    let player = document.createElement("div");
+    const player = document.createElement("div");
     player.classList.add("player");
 
     player.innerHTML = `
     <p class="player1">P<span class="layer">layer</span> ${i + 1}</p>
-    <span class="score">0</span>`;
+    <span class="score">0</span>
+    <p class="CURRENT-TURN">CURRENT TURN</p>
+    <div class="arrow"></div>`;
 
     if (gameDescription.Players == 2) {
-      footer.style.justifyContent = "center";
+      playersWrapper.style.justifyContent = "center";
     }
-    footer.appendChild(player);
+    playersWrapper.appendChild(player);
+    footer.appendChild(playersWrapper);
   }
 } else {
   timeAndMoves.forEach((element) => {
     element.style.display = "flex";
     footer.style.justifyContent = "center";
+    playersWrapper.style.width = "0px";
   });
 }
 
@@ -273,12 +278,140 @@ if (gameDescription.Players == 1) {
     });
   });
 } else {
+  ////////////////////////////////////////////
 
+  /////////////////////////////////////
 
-
-  
-  
-  for (let i = 1; i <= gameDescription.Players; i++) {
-     
+  function goToNextPlayer() {
+    playerBoxes.forEach((box) => {
+      box.classList.remove("yellowBackground");
+      box.children[1].style.color = "#304859";
+      box.children[2].style.display = "none";
+      box.children[3].style.display = "none";
+    });
+    playerBoxes[currentTurn].classList.add("yellowBackground");
+    playerBoxes[currentTurn].children[1].style.color = "white";
+    playerBoxes[currentTurn].children[2].style.display = "inline";
+    playerBoxes[currentTurn].children[3].style.display = "inline";
   }
+
+  let arrayOfPlayers = [];
+
+  for (let i = 0; i < gameDescription.Players; i++) {
+    arrayOfPlayers.push([`Player${i}`, 0]);
+  }
+
+  let currentTurn = 0;
+  const playerBoxes = playersWrapper.childNodes;
+
+  // console.log(arrayOfPlayers);
+
+  playerBoxes[currentTurn].classList.add("yellowBackground");
+  playerBoxes[currentTurn].children[1].style.color = "white";
+  playerBoxes[currentTurn].children[2].style.display = "inline";
+  playerBoxes[currentTurn].children[3].style.display = "inline";
+
+  const circles = body.querySelectorAll(".circle-for-4, .circle-for-6");
+  const chosenToCancel = [];
+
+  let countOfSucces = 0;
+  circles.forEach((circle) => {
+    circle.addEventListener("click", (e) => {
+      if (e.currentTarget.classList.contains("disabled")) {
+        return;
+      }
+      if (e.currentTarget.classList.contains("unclickable")) {
+        return;
+      }
+      e.currentTarget.style.background = "#FDA214";
+      e.currentTarget.children[0].style.transform = "rotate(0)";
+      e.currentTarget.children[0].style.opacity = "100%";
+      e.currentTarget.children[0].style.transition = "all 0.3s ease-in";
+      e.currentTarget.children[0].style.visibility = "visible";
+      if (chosenToCancel.indexOf(e.currentTarget) < 0) {
+        chosenToCancel.push(e.currentTarget);
+      }
+
+      if (chosenToCancel.length === 2) {
+        if (
+          chosenToCancel[0].className.split(" ")[1] ==
+          chosenToCancel[1].className.split(" ")[1]
+        ) {
+          const matchingCircles = document.querySelectorAll(
+            `.${chosenToCancel[1].className.split(" ")[1]}`
+          );
+
+          circles.forEach((element) => {
+            element.classList.add("unclickable");
+          });
+
+          setTimeout(() => {
+            matchingCircles.forEach((circle) => {
+              circle.style.background = "#BCCED9";
+              circle.style.transition = "all 0.3s ease-out";
+              circle.classList.add("disabled");
+            });
+
+            circles.forEach((element) => {
+              element.classList.remove("unclickable");
+            });
+          }, 400);
+
+          countOfSucces++;
+
+          let currentScore = parseInt(
+            playerBoxes[currentTurn].children[1].textContent
+          );
+          currentScore += 1;
+          playerBoxes[currentTurn].children[1].textContent = currentScore;
+
+          currentTurn++;
+          if (currentTurn >= arrayOfPlayers.length) {
+            currentTurn = 0;
+          }
+          
+          goToNextPlayer();
+
+          chosenToCancel.length = 0;
+        } else {
+          chosenToCancel.forEach((element) => {
+            circles.forEach((element) => {
+              element.classList.add("unclickable");
+            });
+            setTimeout(() => {
+              element.style.background = "#304859";
+              element.children[0].style.opacity = "0";
+              element.children[0].style.visibility = "hidden";
+              circles.forEach((element) => {
+                element.classList.remove("unclickable");
+              });
+            }, 800);
+          });
+          chosenToCancel.length = 0;
+
+          currentTurn++;
+          if (currentTurn >= arrayOfPlayers.length) {
+            currentTurn = 0;
+          }
+
+          goToNextPlayer();
+        }
+      }
+    });
+  });
+
+  circles.forEach((circle) => {
+    circle.addEventListener("click", () => {
+      if (countOfSucces * 2 == circles.length) {
+        setTimeout(() => {
+          menuParent.classList.add("bluredFromResult");
+          let scoresArray = [];
+          for (let i = 0; i < arrayOfPlayers.length; i++) {
+            scoresArray.push(playerBoxes[i].childNodes[3].textContent);
+            console.log(scoresArray);
+          }
+        }, 700);
+      }
+    });
+  });
 }

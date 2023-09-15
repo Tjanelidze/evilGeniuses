@@ -146,6 +146,12 @@ h1 {
   gap: 30px;
 }
 
+.players-wrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: 30px;
+}
 .player {
   display: flex;
   justify-content: space-around;
@@ -322,6 +328,44 @@ a {
   display: inline;
 }
 
+.bluredFromResult .darkScreen {
+  display: inline;
+}
+
+.bluredFromResult .result {
+  display: flex;
+}
+
+.yellowBackground {
+  background-color: #fda214;
+  color: white;
+}
+.player {
+  position: relative;
+}
+
+.CURRENT-TURN {
+  position: absolute;
+  bottom: -25px;
+  color: #152938;
+  text-align: center;
+  font-size: 13px;
+  letter-spacing: 2px;
+  display: none;
+}
+.arrow {
+  width: 0;
+  height: 0;
+  border-left: 14px solid transparent;
+  border-right: 14px solid transparent;
+  border-bottom: 18px solid #fda214;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: -17px;
+  display: none;
+}
+
 @media (max-width: 768px) {
   .player {
     width: 164px;
@@ -341,9 +385,20 @@ a {
   .restart_game {
     font-size: 16px;
   }
+  .CURRENT-TURN {
+    display: none;
+    opacity: 0;
+  }
 }
 
 @media (max-width: 530px) {
+  .arrow {
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 14px solid #fda214;
+    top: -13px;
+  }
+
   .player {
     width: 100%;
     height: 70px;
