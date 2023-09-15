@@ -106,8 +106,8 @@ function displayCircles() {
   const circles = parent.querySelectorAll(".circle-for-4, .circle-for-6");
   circles.forEach((circle) => {
     Array.from(circle.children).forEach((child) => {
-      child.style.opacity = "0";
-      child.style.visibility = "hidden";
+      // child.style.opacity = "0";
+      // child.style.visibility = "hidden";
     });
   });
 }
@@ -239,7 +239,7 @@ if (gameDescription.Players == 1) {
             circles.forEach((element) => {
               element.classList.remove("unclickable");
             });
-          }, 400);
+          }, 300);
           countOfSucces++;
           moves++;
           movesDisplay.innerHTML = moves;
@@ -256,7 +256,7 @@ if (gameDescription.Players == 1) {
               circles.forEach((element) => {
                 element.classList.remove("unclickable");
               });
-            }, 800);
+            }, 700);
           });
 
           moves++;
@@ -413,8 +413,6 @@ if (gameDescription.Players == 1) {
             index,
           }));
           arrWithIndices.sort((a, b) => b.value - a.value);
-
-          console.log(arrWithIndices[0].value);
           arrWithIndices.forEach((player) => {
             let box = document.createElement("div");
             box.classList.add("box");
@@ -424,7 +422,15 @@ if (gameDescription.Players == 1) {
             box.innerHTML = `<p class="player-name">Player ${player.index + 1}${
               arrWithIndices[0].value === player.value ? " (Winner!)" : ""
             }</p>
-            <p class="box_score">${player.value} Pairs</p>`;
+            <p class="box_score-result">${player.value} Pairs</p>`;
+
+            if (box.classList.contains("winner")) {
+              box.children[1].classList.add("box_score-result-white");
+            }
+            if (box.classList.contains("winner")) {
+              box.children[0].classList.add("player-name-white");
+            }
+
             playersWrapperInResult.appendChild(box);
           });
 

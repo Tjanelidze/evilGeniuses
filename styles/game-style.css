@@ -7,7 +7,8 @@
 body {
   font-family: "Atkinson Hyperlegible", sans-serif;
   font-weight: 700;
-  min-height: 100vh;
+  height: 100vh;
+  height: 100lvh;
 }
 
 .menu-parent {
@@ -19,6 +20,7 @@ body {
   grid-template-columns: 100%;
   background-color: #fcfcfc;
   height: 100vh;
+  height: 100lvh;
   margin: 0 auto;
   position: relative;
   align-items: center;
@@ -370,11 +372,18 @@ a {
   background-color: #152938;
 }
 
-.box_score {
+.box_score-result {
+  color: #304859;
+}
+.box_score-result-white {
   color: white;
 }
 
 .player-name {
+  color: #7191a5;
+}
+
+.player-name-white {
   color: white;
 }
 
@@ -446,29 +455,33 @@ a {
   }
 
   .circle_container-for-4 {
-    grid-template-columns: 55px 55px 55px 55px;
+    grid-template-columns: 60px 60px 60px 60px;
     gap: 12px;
     font-size: 35px;
     color: white;
   }
 
   .circle-for-4 {
-    width: 55px;
-    height: 55px;
+    width: 60px;
+    height: 60px;
   }
 
   .circle_container-for-6 {
-    grid-template-columns: 50px 50px 50px 50px 50px 50px;
+    grid-template-columns: 52px 52px 52px 52px 52px 52px;
     gap: 5px;
   }
 
   .circle-for-6 {
-    width: 50px;
-    height: 50px;
+    width: 52px;
+    height: 52px;
   }
 
   .container {
     gap: 70px;
+  }
+
+  .players-wrapper {
+    gap: 15px;
   }
 
   .result {
