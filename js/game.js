@@ -106,8 +106,8 @@ function displayCircles() {
   const circles = parent.querySelectorAll(".circle-for-4, .circle-for-6");
   circles.forEach((circle) => {
     Array.from(circle.children).forEach((child) => {
-      // child.style.opacity = "0";
-      // child.style.visibility = "hidden";
+      child.style.opacity = "0";
+      child.style.visibility = "hidden";
     });
   });
 }
